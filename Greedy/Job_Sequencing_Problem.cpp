@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include<stack>
+#include<vector>
 using namespace std;
 
 bool static comparator(Job a,Job b )

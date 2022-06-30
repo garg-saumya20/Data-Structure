@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <stack>
+#include <vector>
 using namespace std;
 
 vector<int> minPartition(int N)
