@@ -1,52 +1,54 @@
-//LEETCODE QUESTION
-//Capacity to ship packages in D days
-// Weights=[1,2,3,4,5,6,7,8,9,10]
-// maximum number of days (D)=5
-//Minimum capacity of ship
-class Solution {
-public:
-    int shipWithinDays(vector<int>& weights, int D) {
-        int mini=*max_element(weights.begin(),weights.end());
-         int maxa;
-        for(int i=0;i<weights.size();i++)
-        {
-            maxa+=weights[i];
-           
-        }
-      
-        
-        
-       // int ans;
-    while(mini<maxa)
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool isPossible(vector<int> &A, int N, int M, int mid)
 {
-    int mid=mini+(maxa-mini)/2;
-    if(canBeTransferred(mid,D,weights))
+    int sum = 0;
+    int count = 1;
+    for (int i = 0; i < N; i++)
     {
-       // ans=min(mid,ans);
-        maxa=mid;
-    }
-    else
-    {
-        mini=mid+1;
-    }
-}
-return mini;
-    }
-    bool canBeTransferred(int mid,int D,vector<int>&  weights)
-{
-    int sum=0;
-    int Day=1;
-    for(int i=0;i<weights.size();i++)
-    {
-        if(sum+weights[i]<=mid)
+
+        if (A[i] + sum <= mid)
         {
-        sum+=weights[i];
+            sum += A[i];
         }
-        else{
-            Day++;
-            sum=weights[i];
+        else
+        {
+            count++;
+            sum = A[i];
+            if (count > M || A[i] > mid)
+            {
+                return false;
+            }
         }
     }
-    return Day<=D;
+    return true;
 }
-};
+int Solution::solve(vector<int> &A, int B)
+{
+
+    int low = 0;
+    int high = 0;
+    int ans = -1;
+    int N = A.size();
+    for (int i = 0; i < N; i++)
+    {
+        high = high + A[i];
+    }
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+        if (isPossible(A, N, B, mid))
+        {
+            ans = mid;
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+    return ans;
+}
