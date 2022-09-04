@@ -46,3 +46,37 @@ int findMinimumCost(string str) {
     
     
 }
+
+//Efficient approach
+
+int countRev (string s)
+{
+    // your code here
+    int n=s.length();
+    int lb=0;
+    int rb=0;
+    if(n%2==1)
+    {
+        return -1;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(s[i]=='{')
+        {
+            lb++;
+        }
+        else
+        {
+            if(lb==0)
+            {
+                rb++;
+            }
+            else
+            {
+                lb--;
+            }
+        }
+    }
+    int ans=ceil(lb/2.0)+ceil(rb/2.0);
+    return ans;
+}

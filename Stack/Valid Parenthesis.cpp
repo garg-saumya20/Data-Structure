@@ -2,7 +2,7 @@
 #include<stack>
 using namespace std;
 
-bool isValidParenthesis(string expression)
+bool validParenthesis(string expression)
 {
   	 stack<char> s;
      for(int i=0; i<expression.length(); i++) {
@@ -42,3 +42,6 @@ bool isValidParenthesis(string expression)
     else
         return false;
 }
+
+
+
